@@ -38,6 +38,7 @@ class Board:
             this innermost element won't be a list of possibilities anymore but the
             single number that is the assignment.
     """
+    
 
     def __init__(self):
         """Constructor for a board, sets up a board with each element having all
@@ -106,7 +107,12 @@ class Board:
         Returns:
             a tuple of row, column index identifying the most constrained cell
         """
-        pass
+        min=9
+        pos=[0,0]
+        for i in range(self.size):
+            for j in range(self.size):
+                if isinstance(self.rows[i][j]) and len(self.rows[i][j])<min:
+                    min=len(self.rows[i][j])
 
     def failure_test(self) -> bool:
         """Check if we've failed to correctly fill out the puzzle. If we find a cell
@@ -116,8 +122,11 @@ class Board:
         Returns:
             True if we have failed to fill out the puzzle, False otherwise
         """
-        pass
-
+        for i in (0,9):
+            for j in (0,9):
+                if len(self.rows[i][j])==0:
+                    return True
+        return False
     def goal_test(self) -> bool:
         """Check if we've completed the puzzle (if we've placed all the numbers).
         Naively checks that we've placed as many numbers as cells on the board
@@ -125,7 +134,8 @@ class Board:
         Returns:
             True if we've placed all numbers, False otherwise
         """
-        pass
+        return self.num_nums_placed==self.size*self.size
+        
 
     def update(self, row: int, column: int, assignment: int) -> None:
         """Assigns the given value to the cell given by passed in row and column
@@ -139,8 +149,14 @@ class Board:
             column - index of the column to assign
             assignment - value to place at given row, column coordinate
         """
-        pass
-
+        self.rows[row][column]=assignment
+        self.num_nums_placed+=1
+        for i in range(self.size):
+            remove_if_exists(self.rows[row][i],assignment)
+            remove_if_exists(self.rows[i][column],assignment)
+        
+        for i, j in self.subgrid_coordinates(row,column):
+            remove_if_exists(self.rows[i][j],assignment)
 
 def DFS(state: Board) -> Board:
     """Performs a depth first search. Takes a Board and attempts to assign values to
@@ -173,6 +189,7 @@ def BFS(state: Board) -> Board:
 
 
 if __name__ == "__main__":
+    
     # uncomment the below lines once you've implemented the board class
    
     # # CODE BELOW HERE RUNS YOUR BFS/DFS
