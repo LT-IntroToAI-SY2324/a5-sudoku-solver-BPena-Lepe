@@ -182,7 +182,6 @@ def DFS(state: Board) -> Board:
                 cpy=copy.deepcopy(curr)
                 cpy.update(row,col, el)
                 the_stack.push(cpy)
-    for trip in first_moves:
         
     return None
 
@@ -199,7 +198,12 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    q=Queue([state])
+    while not q.is_empty():
+        curr=q.pop()
+        if curr.goal_test():
+            return curr
+        elif
 
 
 if __name__ == "__main__":
