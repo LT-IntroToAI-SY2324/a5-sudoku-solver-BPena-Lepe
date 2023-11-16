@@ -177,9 +177,12 @@ def DFS(state: Board) -> Board:
         either None in the case of invalid input or a solved board
     """
     the_stack = Stack([state])
+    count=0
     while not the_stack.is_empty():
         curr = the_stack.pop()
+        count+=1
         if curr.goal_test():
+            print(f"It took {count} iterations to solve")
             return curr
         elif not curr.failure_test():
             row, col = curr.find_most_constrained_cell()
@@ -205,9 +208,12 @@ def BFS(state: Board) -> Board:
         either None in the case of invalid input or a solved board
     """
     q=Queue([state])
+    count = 0
     while not q.is_empty():
         curr=q.pop()
+        count+=1
         if curr.goal_test():
+            print(f"It took {count} iterations to solve")
             return curr
         elif not curr.failure_test():
             row, col=curr.find_most_constrained_cell()
@@ -371,4 +377,4 @@ if __name__ == "__main__":
     print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
 
     test_dfs_or_bfs(False, second_moves)
-    pass
+    
