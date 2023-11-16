@@ -31,4 +31,4 @@ After completing the assignment, answer the following reflection questions:
 
 3. Considering the current implementation, how might the Sudoku solver be adapted or extended for larger puzzles or different types of grid-based logic games? How can the lessons learned from this assignment be applied to real-world problem-solving or optimization challenges?
 
-
+It could be applied
